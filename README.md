@@ -43,7 +43,7 @@ Now the machine learning model is run on the newly sampled testing dataset which
 |high_risk|.01|.70|.02|
 |low_risk|1.0|.60|.75|
 
-The precision is really low for the high_risk and perfect for the low_risk.  This is a problem with such an imbalanced dataset and the over-sampling did not help this.  These results suggest that this model is not good for predicting which applicant might be high_risk which is really the goal of the study.
+The precision is really low for the high_risk and perfect for the low_risk.  This is a problem with such an imbalanced dataset and the over-sampling did not help this.  Although the F1 is reasonable for the low_risk, it basically says the model can only predict 2% of the high_risk which makes the model fairly useless.  These results suggest that this model is not good for predicting which applicant might be high_risk which is really the goal of the study.
 
 2. ### SMOTE Oversampling
 
@@ -71,10 +71,33 @@ Now the machine learning model is run on the newly sampled testing dataset which
 |high_risk|.01|.63|.02|
 |low_risk|1.0|.69|.63|
 
-So the accuracy went up just a little bit but now the F1 went down.  So this model is even worse than the oversampling one.  It still does a poor job at predicting the high risk values.
+So the accuracy went up just a little bit but now the F1 for low_risk went down.  So this model is even worse than the oversampling one.  It still does a poor job at predicting the high risk values.
 
 3.  ### Undersampling
 
+Undersampling techniques reduce the majority class rather than increasing the minority class.  Our random undersampling model reduces the majority class by randomly selecting instances from the majority class to remove from the dataset.  
+
+After running the Cluster Centroids undersampling model, the counts in each class are now:
+
+
+|Target Class|Number of Records|
+| :---   |----:|
+|low_risk | 246|
+|high_risk| 246|
+
+Now the machine learning model is run on the newly sampled testing dataset which results in the following Statistics:
+
+|Metric|Result|Result|
+| :---   |----:|----:|
+|Accuracy | .547|--|
+|Confusion Matrix| 69|32|
+|--|10,073|7,031|
+
+
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.01|.68|.01|
+|low_risk|1.0|.41|.58|
 
 
 
