@@ -165,7 +165,7 @@ The results of the BRFC model are as follows:
 |high_risk|.09|.92|.16|
 |low_risk|1.0|.94|.97|
 
-So this model has very high accuracy in predicting the low_risk applications.  The F1 has increased to double digist for the high_risk but is still very low.  So again, this model is not going to be useful for predicting the high_risk applications.  
+So this model has very high accuracy and precision. However, the recall is very low for high_risk so the F1 is still too low to be a reliable model.  The F1 has increased to double digits for the high_risk but is still very low.  So again, this model is not going to be useful for predicting the high_risk applications.  
 
 ## Summary
 
@@ -186,4 +186,4 @@ The following table shows how the different methods perform comparatively via se
 | Easy Ensemble AdaBoost | High_risk | .93      | .09       | .92    | .16 |
 |                        | Low_risk  |          | 1.0       | .94    | .97 |
 
-None of the models performs well to predict the high_risk applicatons.  The Easy Ensemble ADABoost gives the best results metrics for getting the low_risk correct and closest on the high_risk.  I would not use any of these models for making reliable predictions.  I would consider developing some more potential predictive features plus gathering more data that includes more high_risk real data points.  
+None of the models performs well to predict the high_risk applicatons.  The Easy Ensemble ADABoost gives the best results metrics for getting the low_risk correct and closest on the high_risk.  Given the low F1 scores for high_risk, I would not use any of these models for making reliable predictions.  I would consider developing some more potential predictive features plus gathering more data that includes more high_risk real data points.  
