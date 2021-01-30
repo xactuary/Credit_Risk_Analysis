@@ -16,8 +16,26 @@ Once the y variable and X features dataset are defined, I can look and see how t
 |low_risk | 68,470|
 |high_risk| 347|
 
+This result shows that this is a very unbalanced dataset.  So the following is an analysis using imbalanced maching learning techniques.
+
+1. ### Oversampling Analysis
+
+Oversampling chooses more instances from the "high_risk" category to increase the size of this class.  
+After running the oversampling model, the counts in each class are now:
 
 
+|Target Class|Number of Records|
+| :---   |----:|
+|low_risk | 51,366|
+|high_risk| 51,366|
+
+Now the machine learning model is run on the newly sampled testing dataset which results in the following Statistics:
+
+|Metric|Result|Result|
+| :---   |----:|--|
+|Accuracy | .65|--|
+|Confusion Matrix| 71|30|
+|--|6,883|10,221|
 
 
 
