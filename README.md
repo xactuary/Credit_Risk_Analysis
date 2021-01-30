@@ -38,4 +38,10 @@ Now the machine learning model is run on the newly sampled testing dataset which
 |--|6,883|10,221|
 
 
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.01|.70|.02|
+|low_risk|1.0|.60|.75|
+
+
 
