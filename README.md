@@ -17,10 +17,7 @@ To prepare the dataset for Machine learning, there are several feature variables
       X = dummies.drop(columns="loan_status",axis=1)
 Once the y variable and X features dataset are defined, I can look and see how the target variable splits out to see if we have balanced data or not.  The results are as follows:
 
-|Target Class|Number of Records|
-| :---   |----:|
-|low_risk | 68,470|
-|high_risk| 347|
+![](https://github.com/xactuary/Credit_Risk_Analysis/blob/master/Resources/ycounter1.PNG)
 
 This result shows that this is a very unbalanced dataset.  So the following is an analysis using imbalanced machine learning techniques.
 
