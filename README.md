@@ -12,10 +12,9 @@ To prepare the dataset for Machine learning, there are several feature variables
 Once the y variable and X features dataset are defined, I can look and see how the target variable splits out to see if we have balanced data or not.  The results are as follows:
 
 |Target Class|Number of Records|
-|____________|_________________|
-| low_Risk|68,470|
-_________________
-|High_Risk|347|
+| :---   |----:|
+|low_risk | 68,470|
+|high_risk| 347|
 
 
 
