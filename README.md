@@ -6,10 +6,15 @@ a model for predicting whether or not an applicant will be a good or bad credit 
 ### Dataset and Data Preparation
 The data set includes 68,817 rows (Observations) and 86 columns (Variables).  There is no data dictionary to describe what is in the variables so I am keeping them all and letting the machine learning algorithm try and find the relevant variables.  
   
-The target variable is "loan_status" which describes whether the borrower is "low risk" or "high risk".  I set the y target variable to be equal to just this column.  
+The target variable is "loan_status" which describes whether the borrower is "low risk" or "high risk".  I set the y target variable to be equal to just this column. 
+
+      # Create our target
+      y = dummies.loan_status
   
 To prepare the dataset for Machine learning, there are several feature variables that need to be converted to numeric. These are the ones that are highlighted as "objects" in the variable list.  I have identified the objects using Dtypes and used the get.dummies command to convert the specific columns.  I have left out loan_status because I don't want that changed over.  It would also be possible to define the X features by dropping the "loan status" then running get_dummies with enumerating the columns and it will convert all yes/no columns to numeric.  But I took the long route so I could see what was happening in each step.  The feature variables do not need to be scaled since I am using a classifier model.  
 
+      dummies = pd.get_dummies(df,columns=["home_ownership","verification_status","issue_d","pymnt_plan","initial_list_status","next_pymnt_d","application_type","hardship_flag","debt_settlement_flag"])
+      X = dummies.drop(columns="loan_status",axis=1)
 Once the y variable and X features dataset are defined, I can look and see how the target variable splits out to see if we have balanced data or not.  The results are as follows:
 
 |Target Class|Number of Records|
