@@ -5,8 +5,9 @@ a model for predicting whether or not an applicant will be a good or bad credit 
 
 ### Dataset and Data Preparation
 The data set includes 68,817 rows (Observations) and 86 columns (Variables).  There is no data dictionary to describe what is in the variables so I am keeping them all and letting the machine learning algorithm try and find the relevant variables.  
-
-The target variable is "Loan_Status" which describes whether the borrower is "low risk" or "high risk".  I set the y target variable to be equal to just this column.  
+  
+The target variable is "loan_status" which describes whether the borrower is "low risk" or "high risk".  I set the y target variable to be equal to just this column.  
+  
 To prepare the dataset for Machine learning, there are several feature variables that need to be converted to numeric. These are the ones that are highlighted as "objects" in the variable list.  I have identified the objects using Dtypes and used the get.dummies command to convert the specific columns.  I have left out loan_status because I don't want that changed over.  It would also be possible to define the X features by dropping the "loan status" then running get_dummies with enumerating the columns and it will convert all yes/no columns to numeric.  But I took the long route so I could see what was happening in each step.  The feature variables do not need to be scaled since I am using a classifier model.  
 
 Once the y variable and X features dataset are defined, I can look and see how the target variable splits out to see if we have balanced data or not.  The results are as follows:
@@ -16,7 +17,7 @@ Once the y variable and X features dataset are defined, I can look and see how t
 |low_risk | 68,470|
 |high_risk| 347|
 
-This result shows that this is a very unbalanced dataset.  So the following is an analysis using imbalanced maching learning techniques.
+This result shows that this is a very unbalanced dataset.  So the following is an analysis using imbalanced machine learning techniques.
 
 1. ### Oversampling Analysis
 
@@ -166,5 +167,23 @@ The results of the BRFC model are as follows:
 
 So this model has very high accuracy in predicting the low_risk applications.  The F1 has increased to double digist for the high_risk but is still very low.  So again, this model is not going to be useful for predicting the high_risk applications.  
 
+## Summary
 
+The following table shows how the different methods perform comparatively via selected performance metrics.
 
+| Method                 | Class     | Accuracy | Precision | Recall | F1  |
+|------------------------|-----------|----------|-----------|--------|-----|
+| Oversampling           | High_risk | .65      | .01       | .70    | .02 |
+|                        | Low_risk  |          | 1.0       | .60    | .75 |
+| SMOTE                  | High_risk | .66      | .01       | .63    | .02 |
+|                        | Low_risk  |          | 1.0       | .69    | .63 |
+| Cluster Centroids      | High_risk | .547     | .01       | .68    | .01 |
+|                        | Low_risk  |          | 1.0       | .41    | .58 |
+| SMOTEEN                | High_risk | .651     | .01       | .72    | .02 |
+|                        | Low_risk  |          | 1.0       | .58    | .73 |
+| Balanced Random Forest | High_risk | .788     | .03       | .70    | .06 |
+|                        | Low_risk  |          | 1.0       | .87    | .93 |
+| Easy Ensemble AdaBoost | High_risk | .93      | .09       | .92    | .16 |
+|                        | Low_risk  |          | 1.0       | .94    | .97 |
+
+None of the models performs well to predict the high_risk applicatons.  The Easy Ensemble ADABoost gives the best results metrics for getting the low_risk correct and closest on the high_risk.  I would not use any of these models for making reliable predictions.  I would consider developing some more potential predictive features plus gathering more data that includes more high_risk real data points.  
