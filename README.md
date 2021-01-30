@@ -32,7 +32,7 @@ After running the oversampling model, the counts in each class are now:
 Now the machine learning model is run on the newly sampled testing dataset which results in the following Statistics:
 
 |Metric|Result|Result|
-| :---   |----:|--|
+| :---   |----:|----:|
 |Accuracy | .65|--|
 |Confusion Matrix| 71|30|
 |--|6,883|10,221|
@@ -42,6 +42,39 @@ Now the machine learning model is run on the newly sampled testing dataset which
 | :---   |----:|----:|----:|
 |high_risk|.01|.70|.02|
 |low_risk|1.0|.60|.75|
+
+The precision is really low for the high_risk and perfect for the low_risk.  This is a problem with such an imbalanced dataset and the over-sampling did not help this.  These results suggest that this model is not good for predicting which applicant might be high_risk which is really the goal of the study.
+
+2. ### SMOTE Oversampling
+
+SMOTE - synthetic minority oversampling technique - increases the size of the high_risk data by interpolating between the high_risk data points and adding these interpolated values in.  So they are close to existing high_risk data points but not equal to them.  So SMOTE creates synthetic sample values. 
+
+After running the SMOTE model, the counts in each class are now:
+
+
+|Target Class|Number of Records|
+| :---   |----:|
+|low_risk | 51,366|
+|high_risk| 51,366|
+
+Now the machine learning model is run on the newly sampled testing dataset which results in the following Statistics:
+
+|Metric|Result|Result|
+| :---   |----:|----:|
+|Accuracy | .66|--|
+|Confusion Matrix| 64|37|
+|--|5,287|11,817|
+
+
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.01|.63|.02|
+|low_risk|1.0|.69|.63|
+
+So the accuracy went up just a little bit but now the F1 went down.  So this model is even worse than the oversampling one.  It still does a poor job at predicting the high risk values.
+
+3.  ### Undersampling
+
 
 
 
