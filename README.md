@@ -73,12 +73,11 @@ Now the machine learning model is run on the newly sampled testing dataset which
 
 So the accuracy went up just a little bit but now the F1 for low_risk went down.  So this model is even worse than the oversampling one.  It still does a poor job at predicting the high risk values.
 
-3.  ### Undersampling
+3.  ### Undersampling using Cluster Centroids
 
-Undersampling techniques reduce the majority class rather than increasing the minority class.  Our random undersampling model reduces the majority class by randomly selecting instances from the majority class to remove from the dataset.  
+Undersampling techniques reduce the majority class rather than increasing the minority class.  Our random undersampling model reduces the majority class by randomly selecting instances from the majority class to remove from the dataset. Cluster Centroids identifies clusters in the majority class then creates new data points by picking data that would be representative of the clusters.  Then the majority class is undersampled to reduce the dataset.   
 
 After running the Cluster Centroids undersampling model, the counts in each class are now:
-
 
 |Target Class|Number of Records|
 | :---   |----:|
@@ -98,6 +97,74 @@ Now the machine learning model is run on the newly sampled testing dataset which
 | :---   |----:|----:|----:|
 |high_risk|.01|.68|.01|
 |low_risk|1.0|.41|.58|
+
+The accuracy on this model went way down.  This is also reflected in the F1 score decreasing for the low_risk.  This model is also a poor performer for predicting the high_class applications.
+
+4.  ### Combination (Over and Under) Sampling using SMOTEEN
+
+SMOTEEN is a technique that combines over and under sampling.  It combines the SMOTE method with the Edited Nearest Neighbors to both increase the high_risk sample and decrease the low_risk sample.  
+
+After running the SMOTEEN model, the counts in each class are now:
+
+|Target Class|Number of Records|
+| :---   |----:|
+|low_risk | 46,653|
+|high_risk| 51,361|
+
+Now the machine learning model is run on the newly sampled testing dataset which results in the following Statistics:
+
+|Metric|Result|Result|
+| :---   |----:|----:|
+|Accuracy | .651|--|
+|Confusion Matrix| 73|28|
+|--|7,184|9,920|
+
+
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.01|.72|.02|
+|low_risk|1.0|.58|.73|
+
+This model still fails to show that it can properly predict the high_risk applications.  The accuracy improved over the Clustered Centroid method but the other statistics still show a very low F1 for high-risk so there is virtually no ability for this model to predict the high_risk.  Based on these 4 models, we would reject all of them as having any reliability for projecting the high_risk clients.  
+
+5. ### Balanced Random Forest Classifier - BRFC
+
+This model uses an extended decision tree to try and categorize the data into high_risk versus low_risk.  Note that we are using the original data for this rather than the over and under sampled data.  
+The results of the BRFC model are as follows:
+
+|Metric|Result|Result|
+| :---   |----:|----:|
+|Accuracy | .788|--|
+|Confusion Matrix| 71|30|
+|--|2,153|14,951|
+
+
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.03|.70|.06|
+|low_risk|1.0|.87|.93|
+
+This model improves the accuracy and the F1 score for the low_risk class.  In fact, it is a very good performing for predicting the low_risk.  However, it still has very poor statistics for predicting the high_risk class.  The F1 improved but is still incredibly low so again this model cannot be used to predict which applications will be high_risk.
+
+6.  ### Easy Ensemble AdaBoost Classifier
+
+AdaBoost is adaptive boosting which runs the model multiple times and each time improves on the prior by giving extra weight to the errors of the previous model.
+
+The results of the BRFC model are as follows:
+
+|Metric|Result|Result|
+| :---   |----:|----:|
+|Accuracy | .93|--|
+|Confusion Matrix| 93|8|
+|--|983|116,121|
+
+
+|Class|Precision|Recall|F1|
+| :---   |----:|----:|----:|
+|high_risk|.09|.92|.16|
+|low_risk|1.0|.94|.97|
+
+So this model has very high accuracy in predicting the low_risk applications.  The F1 has increased to double digist for the high_risk but is still very low.  So again, this model is not going to be useful for predicting the high_risk applications.  
 
 
 
